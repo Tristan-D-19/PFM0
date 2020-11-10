@@ -21,11 +21,25 @@ Pfm0AudioProcessor::Pfm0AudioProcessor()
                       #endif
                        .withOutput ("Output", AudioChannelSet::stereo(), true)
                      #endif
-                       )
-#endif
-{
-}
+                       ),
 
+#endif
+apvts(*this, nullptr)
+//shouldPlaySound
+{
+    
+//    shouldPlaySound = new AudioParameterBool("ShouldPlaySoundParam", "shouldPlaySound",  false);
+//    addParameter(shouldPlaySound);
+    
+    auto shouldPlaySoundParam = std::make_unique<AudioParameterBool>("ShouldPlaySoundParam", "shouldPlaySound", false);
+    auto* param = apvts.createAndAddParameter(std::move(shouldPlaySoundParam));
+    shouldPlaySound = dynamic_cast<AudioParameterBool*>(param);
+    auto bgColorParam = std::make_unique<AudioParameterFloat>("Background Color", "background Color", 0.f, 1.f, 0.5f);
+    param = apvts.createAndAddParameter(std::move(bgColorParam));
+    apvts.state = ValueTree("PFMSynthValueTree");
+    bgColor = dynamic_cast<AudioParameterFloat*>(param);
+}
+    
 Pfm0AudioProcessor::~Pfm0AudioProcessor()
 {
 }
@@ -141,6 +155,7 @@ void Pfm0AudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& m
     // This is here to avoid people getting screaming feedback
     // when they first compile a plugin, but obviously you don't need to keep
     // this code if your algorithm always overwrites all the output channels.
+    Random r;
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
@@ -150,11 +165,15 @@ void Pfm0AudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& m
     // the samples and the outer loop is handling the channels.
     // Alternatively, you can process the samples with the channels
     // interleaved by keeping the same state.
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
-    {
-        auto* channelData = buffer.getWritePointer (channel);
-
-        // ..do something to the data...
+    for (int i = 0; i<buffer.getNumSamples(); ++i){
+        for(int channel = 0; channel < buffer.getNumChannels(); ++channel){
+            if(shouldPlaySound ->get()){
+                buffer.setSample(channel, i, r.nextFloat());
+            }
+            else{
+                buffer.setSample(channel, i, 0);
+            }
+        }
     }
 }
 
@@ -175,14 +194,28 @@ void Pfm0AudioProcessor::getStateInformation (MemoryBlock& destData)
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
+    DBG(apvts.state.toXmlString());
+    MemoryOutputStream mos(destData, false);
+    apvts.state.writeToStream(mos);
 }
 
 void Pfm0AudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
+
+    ValueTree tree = ValueTree::readFromData(data, sizeInBytes);
+    if(tree.isValid()){
+        apvts.state = tree;
+    }
+    DBG(apvts.state.toXmlString());
 }
 
+void Pfm0AudioProcessor::updateAutomatableParamter(RangedAudioParameter * param, float value){
+    param->beginChangeGesture();
+    param->setValueNotifyingHost(value);
+    param->endChangeGesture();
+}
 //==============================================================================
 // This creates new instances of the plugin..
 AudioProcessor* JUCE_CALLTYPE createPluginFilter()

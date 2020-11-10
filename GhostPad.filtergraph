@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <FILTERGRAPH>
-  <FILTER uid="1" x="0.5" y="0.1">
+  <FILTER uid="1" x="0.87875" y="0.2346153846153846">
     <PLUGIN name="Audio Input" descriptiveName="" format="Internal" category="I/O devices"
             manufacturer="JUCE" version="1.0" file="" uid="246006c0" isInstrument="0"
             fileTime="0" infoUpdateTime="0" numInputs="0" numOutputs="2"
@@ -16,7 +16,7 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <FILTER uid="2" x="0.25" y="0.1">
+  <FILTER uid="2" x="0.6899999999999999" y="0.2461538461538462">
     <PLUGIN name="Midi Input" descriptiveName="" format="Internal" category="I/O devices"
             manufacturer="JUCE" version="1.0" file="" uid="cb5fde0b" isInstrument="0"
             fileTime="0" infoUpdateTime="0" numInputs="0" numOutputs="0"
@@ -46,13 +46,13 @@
       </OUTPUTS>
     </LAYOUT>
   </FILTER>
-  <FILTER uid="4" x="0.36125" y="0.4730769230769231" uiLastX_Normal="187"
-          uiLastY_Normal="281" uiopen_Normal="0">
+  <FILTER uid="4" x="0.4725" y="0.4921875" uiLastX_Normal="89" uiLastY_Normal="183"
+          uiopen_Normal="1">
     <PLUGIN name="GhostPad" format="VST3" category="Instrument|Synth" manufacturer="black"
             version="1.0.0" file="/Users/tristan.thomas/Library/Audio/Plug-Ins/VST3/PFM0.vst3"
-            uid="6509b6e4" isInstrument="1" fileTime="16ef102ba22" infoUpdateTime="16ef1077976"
+            uid="6509b6e4" isInstrument="1" fileTime="1729c955250" infoUpdateTime="1729c957faf"
             numInputs="0" numOutputs="2" isShell="0"/>
-    <STATE>191.VMjLgXK....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9XCLt3hKt3hKt3hKt3hYRUUSTEETIckVwTjQisVTTgkdEYjKAQjYPQSPWgUdMcjKAQjct3hdA4hKt3hKt3hKtnTUv.UQAslXuk0UXoWUFE0YQcEV77RRC8Vav8lak4Fc9vyKVMEUy.Ea0cVZtMEcgQWY9..</STATE>
+    <STATE>356.VMjLgrU....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9DCNy3BTYQ0TSsVago2YrU0Y2Y0XqE0ZhsVUF4hKDYlKPUjZTEDLD4RPHAkVpEDTtHEUlA0YMEiVskjLgACMFkkYLoWXxgCah4BVWgkbUcUVtPDTBQjKt3hKtH0YwcjMO4hKUAkTEQ0TtPjYt7VTF4RPXEUPScVLgAycFkET2YEVzzDLgACMFkETEwlXmAiQtDSQFEFLUYjKAolKA4hKt3hKt3hKt3hKt3hKt3hKt3hKt3hYRUUSTEETIckVwTjQisVTTgkdEYjKAQjYPQSPWgUdMcjKAQjct3hdA4hKt3hKt3hKtnTUv.UQAslXuk0UXoWUFE0YQcEV77RRC8Vav8lak4Fc9vyKVMEUy.Ea0cVZtMEcgQWY9..</STATE>
     <LAYOUT>
       <INPUTS/>
       <OUTPUTS>

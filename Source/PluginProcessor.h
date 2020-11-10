@@ -7,6 +7,8 @@
 
   ==============================================================================
 */
+/*TODO: click anywhere and play a note. If the mouse is dragged change pitch. (2 directions + interval)
+ */
 
 #pragma once
 
@@ -21,7 +23,7 @@ public:
     //==============================================================================
     Pfm0AudioProcessor();
     ~Pfm0AudioProcessor();
-
+//    afpvts()
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
     void releaseResources() override;
@@ -53,9 +55,15 @@ public:
 
     //==============================================================================
     void getStateInformation (MemoryBlock& destData) override;
-    void setStateInformation (const void* data, int sizeInBytes) override;
+    void setStateInformation (const void* data, int sizeInBytes)      override;
 
+    AudioParameterBool* shouldPlaySound; //= false;
+    AudioProcessorValueTreeState apvts;
+    AudioParameterFloat* bgColor = nullptr;
+ 
+    static void updateAutomatableParamter(RangedAudioParameter*, float value);
 private:
+    Random r;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Pfm0AudioProcessor)
 };
